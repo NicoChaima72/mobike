@@ -3,7 +3,7 @@ const ejs = require("ejs");
 const path = require("path");
 const methodOverride = require("method-override");
 const session = require("express-session");
-const MemoryStore = session.MemoryStore;
+const MemoryStore = require("memorystore")(session);
 const passport = require("passport");
 const flash = require("connect-flash");
 

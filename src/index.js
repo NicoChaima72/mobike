@@ -55,6 +55,6 @@ app.use(require("./routes/auth"));
 app.use(express.static(path.join(__dirname, "public")));
 
 // listen server
-app.listen(3000, () => {
+app.listen(app.get("port"), () => {
 	console.log("Server run in port 3000");
 });

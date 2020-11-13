@@ -1,0 +1,27 @@
+:root {
+    --color-primary: #F05B48;
+    --color-primary-hover: #D85140;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
+
+html {
+    font-family: 'PT Sans', sans-serif !important;
+}
+
+iframe {
+    width: 100vw;
+    height: calc(93vh + 150px);
+    overflow: hidden!important;
+}
+.bg-primary {
+    background-color: var(--color-primary);
+}
+
+.bg-primary:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.text-primary {
+    color: var(--color-primary);
+}

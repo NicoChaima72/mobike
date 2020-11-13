@@ -1,0 +1,28 @@
+<%- include ('../partials/head.html')  %>
+<button class="fixed z-50 bg-white p-2 shadow rounded-full" style="top: 10px; right: 10px;">
+    <svg class="w-8 text-primary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd"
+            d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z"
+            clip-rule="evenodd" />
+    </svg>
+</button>
+
+<iframe frameborder="0" style="margin-top: -150px;"
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3329.077528750691!2d-70.6598433850494!3d-33.447286604735446!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662c507f91be917%3A0xcfac72a68dd4b986!2sDuoc%20UC%20-%20Sede%20Padre%20Alonso%20de%20Ovalle!5e0!3m2!1ses-419!2scl!4v1605245282821!5m2!1ses-419!2scl"></iframe>
+
+<nav class="fixed grid grid-cols-2 divide-x shadow border border-gray-300 inset-x-0 bottom-0 z-50 bg-white p-4">
+    <a href="" class="w-6 mx-auto">
+        <svg class="<% if(route === 'pages.home') { %> text-primary <% } %>" xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+                d="M12 1.586l-4 4v12.828l4-4V1.586zM3.707 3.293A1 1 0 002 4v10a1 1 0 00.293.707L6 18.414V5.586L3.707 3.293zM17.707 5.293L14 1.586v12.828l2.293 2.293A1 1 0 0018 16V6a1 1 0 00-.293-.707z"
+                clip-rule="evenodd" />
+        </svg>
+    </a>
+    <a href="" class="w-6 mx-auto">
+        <svg class="<% if(route === 'pages.profile') { %> text-primary <% } %>" xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+        </svg>
+    </a>
+</nav>

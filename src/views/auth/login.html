@@ -1,0 +1,30 @@
+<%- include ('../partials/head.html')  %>
+<%- include ('../partials/navbar.html')  %>
+
+<section
+    class="shadow md:w-4/12 mx-4 bg-white md:mx-auto mb-8 mt-4 border border-gray-200 p-5 relative rounded-lg z-50">
+    <h1 class="text-3xl">Iniciar sesion</h1>
+    <form action="" class="my-4">
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                Email
+            </label>
+            <input
+                class="shadow-xs appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="email" type="email">
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                Contraseña
+            </label>
+            <input
+                class="shadow-xs appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="password" type="password">
+        </div>
+        <button type="submit" class="bg-primary text-white font-bold w-full py-2 px-4 rounded">Empecemos!</button>
+    </form>
+    <div class="block text-center mt-6">¿No tienes cuenta? <a href="/register" class="text-primary">Creemos una.</a>
+    </div>
+</section>
+
+<%- include ('../partials/footer.html')  %>

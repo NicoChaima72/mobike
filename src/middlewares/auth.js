@@ -1,24 +1,39 @@
-const jwt = require("jsonwebtoken");
+const isAuthenticated = (req, res, next) => {
+	if (req.isAuthenticated()) {
+		return next();
+	} else {
+		req.flash("error", "No estás autenticado");
+		res.redirect("/login");
+	}
+};
 
-const verifyToken = (req, res, next) => {
-	const token = req.get("Authorization");
-	jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-		if (err) return res.status(401).json({ ok: false, err: "Token no valido" });
-
-		req.user = decoded.user;
-
-		next();
-	});
+const isNotAuthenticated = (req, res, next) => {
+	if (!req.isAuthenticated()) {
+		return next();
+	} else {
+		req.flash("error", "Ya estás autenticado");
+		res.redirect("/");
+	}
 };
 
 const isAdmin = (req, res, next) => {
-	const user = req.user;
-
-	if (user.role !== "ADMIN_ROLE") {
-		return res.status(401).json({ ok: false, err: "No eres administrador" });
+	if (req.user.role === "ADMIN_ROLE") {
+		return next();
+	} else {
+		req.flash("error", "Acceso no autorizado");
 	}
 
 	next();
 };
 
-module.exports = { verifyToken, isAdmin };
+const isUser = (req, res, next) => {
+	if (req.user.role === "USER_ROLE") {
+		return next();
+	} else {
+		req.flash("error", "Solo pueden acceder usuarios");
+	}
+
+	next();
+};
+
+module.exports = { isAuthenticated, isNotAuthenticated, isAdmin, isUser };

@@ -1,0 +1,36 @@
+<%- include ('../partials/head.html')  %>
+<%- include ('../partials/navbar.html')  %>
+<section
+    class="shadow md:w-4/12 mx-4 bg-white md:mx-auto mb-32 mt-4 border border-gray-200 p-5 relative rounded-lg z-50">
+    <h1 class="text-3xl">Mi cuenta</h1>
+    <form action="/profile?_method=PUT" method="POST" class="my-4">
+        <input type="hidden" name="_method" value="PUT">
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+                Nombre
+            </label>
+            <input
+                class="shadow-xs appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="name" name="name" type="text" value="<% if (data.name) {%><%= data.name %><%} else {%><%= user.name %><%}%>">
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                Email
+            </label>
+            <input
+                class="shadow-xs appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="email" name="email" type="email" value="<%= user.email %>" disabled="disabled">
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
+                Telefono
+            </label>
+            <input
+                class="shadow-xs appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="phone" name="phone" type="number"
+                value="<% if (data.phone) {%><%= data.phone %><%} else { if (user.phone) {%><%= user.phone %><%}}%>">
+        </div>
+        <button type="submit" class="bg-primary text-white font-bold w-full py-2 px-4 rounded">Guardar cambios</button>
+    </form>
+</section>
+<%- include ('../partials/navegation-bottom.html')  %>

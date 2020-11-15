@@ -13,22 +13,25 @@ passport.use(
 		async (req, email, password, done) => {
 			const user = await User.findOne({ email: email });
 			if (!user) {
-				// done(error, return usuario, mensaje)
 				req.flash("data", { email, password });
-				return done(null, false, {
-					message: "Email y/o contraseña incorrectos",
-				});
-			} else {
-				const match = await user.matchPassword(password);
-				if (match) {
-					return done(null, user);
-				} else {
-					req.flash("data", { email, password });
-					return done(null, false, {
-						message: "Email y/o contraseña incorrectos",
-					});
-				}
+				req.flash("error", "Usuario y/o contraseña incorrecta");
+				return done(null, false, {});
 			}
+			const match = await user.matchPassword(password);
+
+			if (!match) {
+				req.flash("error", "Usuario y/o contraseña incorrecta");
+				req.flash("data", { email, password });
+				return done(null, false, {});
+			}
+
+			if (user.state === 0) {
+				req.flash("error", "Cuenta dada de baja permanentemente");
+				req.flash("data", { email, password });
+				return done(null, false, {});
+			}
+
+			return done(null, user);
 		}
 	)
 );

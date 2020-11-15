@@ -1,0 +1,126 @@
+<%- include ('../partials/head.html') %>
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-12 d-flex align-items-center justify-content-between">
+                <h1>Usuarios</h1>
+                <% if(user.role ==='ADMIN_ROLE'){ %>
+                <a href="/admin/users/create" class="btn btn-primary"><i class="fas fa-plus mr-2"></i>Agregar</a>
+                <%} %>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="content">
+    <div class="card p-2 mb-5">
+        <div class="card-header mb-3 p-2 text-lg">Listado de usuarios</div>
+        <table id="dataTable" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Email</th>
+                    <th class="d-none">Fecha</th>
+                    <th>Nombre</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach((user) => { %>
+                <tr>
+                    <td>
+                        <div class="rounded p-1 text-center bg-warning">W</div>
+                    </td>
+                    <td><%= user.email %></td>
+                    <td class="d-none"><%= user.date %></td>
+                    <td><%= user.name %></td>
+                    <td>
+                        <div class="d-flex">
+                            <a href="/admin/users/<%= user._id %>" class="btn btn-warning btn-sm mx-1"><i
+                                    class="fas fa-eye"></i></a>
+                            <button class="btn btn-outline-danger btn-sm mx-1" onclick="confirm('¿Dar de bajar permanentemente a <%= user.email%>?') ?
+                                document.getElementById('form-delete-<%= user._id %>').submit() : null">
+                                <i class="fas fa-arrow-down"></i>
+                            </button>
+                        </div>
+                    </td>
+                    <form action="/admin/users/<%= user._id %>?_method=DELETE" id="form-delete-<%= user._id %>"
+                        class="d-none" method="POST">
+                        <input type="hidden" name="_method" value="DELETE" />
+                    </form>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+    <% if(moderators.length > 0 && user.role === 'ADMIN_ROLE') { %>
+    <div class="card p-2 mt-5">
+        <div class="card-header mb-3 p-2 text-lg">Listado de moderadores</div>
+        <table id="dataTable1" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th class="d-none">Fecha</th>
+                    <th>Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% moderators.forEach((user) => { %>
+                <tr>
+                    <td><%= user.email %></td>
+                    <td class="d-none"><%= user.date %></td>
+                    <td><%= user.name %></td>
+                    </form>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <% } %>
+</section>
+
+
+
+<script src="/js/admin/jquery.dataTables.min.js"></script>
+<script src="/js/admin/dataTables.bootstrap4.min.js"></script>
+<script src="/js/admin/dataTables.responsive.min.js"></script>
+<script src="/js/admin/responsive.bootstrap4.min.js"></script>
+
+
+<script>
+    $('#dataTable').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "autoWidth": false,
+        "responsive": true,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+        },
+        "order": [
+            [1, "desc"]
+        ]
+    });
+
+    $('#dataTable1').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "autoWidth": false,
+        "responsive": true,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+        },
+        "order": [
+            [1, "desc"]
+        ]
+    });
+</script>
+
+
+<%- include ('../partials/footer.html') %>

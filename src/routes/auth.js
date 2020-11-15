@@ -23,16 +23,28 @@ router.get("/register", (req, res) => {
 router.post("/register", async (req, res) => {
 	const { email, name, password, password_confirm } = req.body;
 	const errors = [];
+	const emailUser = await User.findOne({ email: email });
+
+	if (emailUser) {
+		errors.push({ text: "El email ya está registrado" });
+	}
 
 	if (name.length === 0) {
 		errors.push({ text: "El nombre es requerido" });
 	}
 
+	if (password.length < 8) {
+		errors.push({ text: "Contraseña de minimo 8 caracteres" });
+	}
+
+	if (password !== password_confirm) {
+		errors.push({ text: "Las contraseñas no coinciden" });
+	}
+
 	if (errors.length > 0) {
-		res.status(400).json({
-			ok: false,
-			error: errors,
-		});
+		req.flash("error_msg", errors);
+		req.flash("data", { name, email });
+		return res.redirect("/register");
 	}
 
 	const newUser = new User({ name, email, password });
@@ -40,7 +52,8 @@ router.post("/register", async (req, res) => {
 
 	await newUser.save();
 
-	res.json({ ok: true, user: newUser });
+	req.flash("success_msg", "Ahora existes, inicia sesion");
+	return res.redirect("/login");
 });
 
 router.post("/logout", (req, res) => {

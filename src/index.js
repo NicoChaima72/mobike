@@ -50,6 +50,9 @@ app.use((req, res, next) => {
 app.use(require("./routes/routes"));
 app.use(require("./routes/users"));
 app.use(require("./routes/auth"));
+app.use(require("./routes/profile"));
+app.use(require("./routes/admin/routes"));
+app.use(require("./routes/admin/users"));
 
 // static files
 app.use(express.static(path.join(__dirname, "public")));

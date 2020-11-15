@@ -1,0 +1,25 @@
+<% if (success_msg.length > 0) { %>
+<div class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-green-600 m-4">
+    <span class="inline-block align-middle mr-8">
+        <%= success_msg %>
+    </span>
+</div>
+<% }  %>
+
+<% if (error.length > 0) { %>
+<div class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-600 m-4">
+    <span class="inline-block align-middle mr-8">
+        <%= error %>
+    </span>
+</div>
+<% }  %>
+
+<% if (error_msg.length > 0) {%>
+<div class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-600 m-4">
+    <% error_msg.forEach((error) => { %>
+    <span class="block align-middle mr-8">
+        <%= error.text %>
+    </span>
+    <% })  %>
+</div>
+<% }  %>

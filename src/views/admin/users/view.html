@@ -1,0 +1,117 @@
+<%- include ('../partials/head.html') %>
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-12">
+                <h1>Ver usuario</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="card card-warning p-0">
+        <div class="card-header">
+            <h3 class="card-title">Estado: WARNING</h3>
+        </div>
+        <div class="card-body row">
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input type="text" class="form-control" name="name" id="name"
+                        value="<% if(user.name) { %> <%= user.name %> <% } %>" disabled>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" email="email" id="email"
+                        value="<% if(user.email) { %> <%= user.email %> <% } %>" disabled>
+                </div>
+
+            </div>
+            <div class="col-12 mt-5">
+                <p class="text-xl">Viajes</p>
+                <table id="dataTable" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th class="d-none"></th>
+                            <th></th>
+                            <th>Tiempo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>12/02/20 13:45</td>
+                            <td class="d-none">1</td>
+                            <td>
+                                <div class="rounded p-1 text-center bg-success">W</div>
+                            </td>
+                            <td>83 min.</td>
+                        </tr>
+                        <tr>
+                            <td>12/02/20 13:45</td>
+                            <td class="d-none">1</td>
+                            <td>
+                                <div class="rounded p-1 text-center bg-warning">W</div>
+                            </td>
+                            <td>83 min.</td>
+                        </tr>
+                        <tr>
+                            <td>12/02/20 13:45</td>
+                            <td class="d-none">1</td>
+                            <td>
+                                <div class="rounded p-1 text-center bg-success">W</div>
+                            </td>
+                            <td>83 min.</td>
+                        </tr>
+                        <tr>
+                            <td>12/02/20 13:45</td>
+                            <td class="d-none">1</td>
+                            <td>
+                                <div class="rounded p-1 text-center bg-warning">W</div>
+                            </td>
+                            <td>83 min.</td>
+                        </tr>
+                        <tr>
+                            <td>12/02/20 13:45</td>
+                            <td class="d-none">1</td>
+                            <td>
+                                <div class="rounded p-1 text-center bg-warning">W</div>
+                            </td>
+                            <td>83 min.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</section>
+
+<script src="/js/admin/jquery.dataTables.min.js"></script>
+<script src="/js/admin/dataTables.bootstrap4.min.js"></script>
+<script src="/js/admin/dataTables.responsive.min.js"></script>
+<script src="/js/admin/responsive.bootstrap4.min.js"></script>
+
+
+<script>
+    $('#dataTable').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "autoWidth": false,
+        "responsive": true,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+        },
+        "order": [
+            [1, "desc"]
+        ]
+    });
+</script>
+
+
+
+<%- include ('../partials/footer.html') %>

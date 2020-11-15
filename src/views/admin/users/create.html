@@ -21,13 +21,14 @@
                     <div class="form-group">
                         <label for="name">Nombre</label>
                         <input type="text" class="form-control" name="name" id="name"
-                            value="<% if(data.name) { %> <%= data.name %> <% } %>" required>
+                            value="<% if(data.name) { %> <%= data.name %> <% } %>" required autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label for="username">Email</label>
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" id="username" name="username" required
-                                value="<% if(data.username) { %> <%= data.username %> <% } %>" autocapitalize="off">
+                                value="<% if(data.username) { %> <%= data.username %> <% } %>" autocapitalize="off"
+                                autocomplete="off">
                             <div class="input-group-append">
                                 <span class="input-group-text">@mobike.com</span>
                             </div>

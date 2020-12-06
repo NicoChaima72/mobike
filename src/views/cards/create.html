@@ -1,0 +1,60 @@
+<%- include ('../partials/head.html')  %>
+<%- include ('../partials/navbar.html')  %>
+<input type="hidden" name="" id="current-page" value="cards">
+
+<section
+    class="shadow md:w-4/12 mx-4 bg-white md:mx-auto mb-32 mt-4 border border-gray-200 p-5 relative rounded-lg z-50">
+    <div class="flex justify-between items-center">
+        <h1 class="text-3xl">Agregar tarjeta</h1>
+    </div>
+    <form action="/cards" method="POST" class="my-4">
+        <input type="hidden" name="type" id="type">
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+                Nombre en tarjeta
+            </label>
+            <input
+                class="shadow-xs appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="name" name="name" type="text" value="<% if (data.name) {%><%= data.name %><%}%>" required>
+        </div>
+        <div class="mb-4">
+            <label class="text-gray-700 text-sm font-bold mb-2" for="name">
+                Numero de tarjeta
+            </label>
+            <span class="text-xs" id="card-type"></span>
+            <input type="text" id="card-number"
+                class="cc-number shadow-xs appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                x-autocompletetype="cc-number" id="card-number"
+                name="number"value="<% if (data.number) {%><%= data.number %><%}%>" required maxlength="19">
+        </div>
+        <div class="mb-4">
+            <div class="grid grid-cols-2 gap-x-3">
+                <div class="">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                        Fecha expiracion
+                    </label>
+                    <input type="text"
+                        class="cc-exp shadow-xs appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        x-autocompletetype="cc-exp" name="expire" placeholder="MM / YY" required maxlength="9">
+                </div>
+                <div class="">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                        CVC
+                    </label>
+                    <input type="text"
+                        class="cc-cvc shadow-xs appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        x-autocompletetype="cc-csc" name="cvc" required autocomplete="off">
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="bg-primary text-white font-bold w-full py-2 px-4 rounded">Agregar</button>
+        <h2 class="validation hidden"></h2>
+    </form>
+</section>
+<%- include ('../partials/navegation-bottom.html')  %>
+<%- include ('../partials/footer.html')  %>
+
+
+<script>
+
+</script>

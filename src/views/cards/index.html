@@ -1,0 +1,47 @@
+<%- include ('../partials/head.html')  %>
+<%- include ('../partials/navbar.html')  %>
+<section
+    class="shadow md:w-4/12 mx-4 bg-white md:mx-auto mb-32 mt-4 border border-gray-200 p-5 relative rounded-lg z-50">
+    <div class="flex justify-between items-center">
+        <h1 class="text-3xl">Mis tarjetas</h1>
+        <a href="/cards/add" class="bg-primary text-white font-bold p-2 px-3 rounded text-2xl leading-none">+</a>
+    </div>
+    <div class="mt-5">
+        <% if(cards.length > 0) { %>
+        <% cards.forEach(card => { %>
+        <div <% if(!card.default) { %>onclick="confirm('Seleccionar tarjeta?') ? document.getElementById('form-default-<%= card._id %>').submit() : null"
+            <% } %>
+            class="flex items-center my-3 border <% if(card.default) { %>border-primary<% } %> p-2 rounded cursor-pointer">
+            <div class="">
+                <% if(card.type === 'mastercard') { %>
+                <img src="https://1000marcas.net/wp-content/uploads/2019/12/MasterCard-Logo.png" alt="" class="w-16">
+                <% } if (card.type === 'visa') { %>
+                <img src="https://logodownload.org/wp-content/uploads/2016/10/visa-logo-3.png" alt="" class="w-16">
+                <% } %>
+            </div>
+            <div class="flex w-full justify-between items-center">
+                <p class="text-xl ml-2 font-medium"><%= card.getNumber %></p>
+                <button class="text-gray-300 hover:text-red-600" onclick="confirm('Eliminar tarjeta?') ?
+                                document.getElementById('form-delete-<%= card._id %>').submit() : null">
+                    <svg class="w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+                <form action="/cards/<%= card._id %>?_method=DELETE" method="POST" id="form-delete-<%= card._id %>"
+                    class="hidden">
+                    <input type="hidden" name="_method" value="DELETE">
+                </form>
+            </div>
+        </div>
+        <form action="/cards/<%= card._id %>/default" method="POST" class="hidden" id="form-default-<%= card._id %>">
+        </form>
+        <% }); %>
+        <% } else { %>
+        <p class="text-center py-10">Registra una tarjeta para dar un paseo</p>
+        <% } %>
+    </div>
+</section>
+<%- include ('../partials/navegation-bottom.html')  %>
+<%- include ('../partials/footer.html')  %>

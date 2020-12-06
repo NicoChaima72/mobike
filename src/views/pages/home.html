@@ -1,11 +1,157 @@
 <%- include ('../partials/head.html')  %>
-<button class="fixed z-50 bg-white p-2 shadow rounded-full" style="top: 10px; right: 10px;">
+<input type="hidden" name="" id="current-page" value="home">
+<% if(journey_pending) { %>
+<input type="hidden" name="" id="current-journey" value="<%= journey_pending._id %>">
+<% } %>
+
+<button id="btn-camera" class="fixed z-10 bg-white p-2 shadow rounded-full" style="top: 10px; right: 10px;">
     <svg class="w-8 text-primary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
         <path fill-rule="evenodd"
             d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z"
             clip-rule="evenodd" />
     </svg>
 </button>
+
+<div id="container-lease"
+    class="w-screen h-screen fixed z-30 bg-white inset-0 p-4 hidden animate__animated animate__fadeInDown animate__faster">
+    <div class="flex justify-between items-start">
+        <div class="flex items-center">
+            <img src="https://image.flaticon.com/icons/png/512/130/130066.png" class="w-16 mr-3">
+            <h3 class="text-3xl">Arrendar bicicleta</h3>
+        </div>
+        <button id="close-lease" class="font-bold">X</button>
+    </div>
+    <div class="mt-5">
+        <% if(user_card) { %>
+        <p class="text-2xl">Tarjeta de credito seleccionada</p>
+        <div class="flex items-center my-3 border p-2 rounded">
+            <div class="">
+                <% if(user_card.type === 'mastercard') { %>
+                <img src="https://1000marcas.net/wp-content/uploads/2019/12/MasterCard-Logo.png" alt="" class="w-16">
+                <% } if (user_card.type === 'visa') { %>
+                <img src="https://logodownload.org/wp-content/uploads/2016/10/visa-logo-3.png" alt="" class="w-16">
+                <% } %>
+            </div>
+            <div class="flex w-full justify-between items-center">
+                <p class="text-xl ml-2 font-medium"><%= user_card.getNumber %></p>
+            </div>
+        </div>
+        <button id="btn-lease" class="mt-24 bg-primary text-white font-bold w-full py-2 px-4 rounded">Arrendar</button>
+        <% } else { %>
+        <p class="text-2xl text-center mt-16">No tienes una tarjeta de credito seleccionada</p>
+        <a href="/cards"
+            class="block text-center mt-10 bg-primary text-white font-bold w-full py-2 px-4 rounded">Seleccionar
+            tarjeta</a>
+        <% } %>
+    </div>
+</div>
+
+<button data-title="Alonso de Ovalle / Dieciocho" class="btn-bike fixed z-1 bg-white p-2 shadow rounded-full border"
+    style="top: 27%; right: 54%">
+    <img src="https://image.flaticon.com/icons/png/512/130/130066.png" alt="" class="w-6">
+</button>
+
+<button data-title="Coronel Pantoja / Tarapaca" class="btn-bike fixed z-1 bg-white p-2 shadow rounded-full border"
+    style="top: 56%; right: 75%">
+    <img src="https://image.flaticon.com/icons/png/512/130/130066.png" alt="" class="w-6">
+</button>
+
+<button data-title="Alonso de Ovalle / Dieciocho" class="btn-bike fixed z-1 bg-white p-2 shadow rounded-full border"
+    style="top: 64%; right: 16%">
+    <img src="https://image.flaticon.com/icons/png/512/130/130066.png" alt="" class="w-6">
+</button>
+
+<div class="w-screen h-screen bg-white fixed inset-0 z-20 p-4 hidden animate__animated animate__fadeInUp animate__faster"
+    id="container-information">
+    <div class="flex justify-between items-start">
+        <h2 id="title-information" class="text-3xl font-bold mt-4">Title</h2>
+        <button id="close-information" class="font-bold">X</button>
+    </div>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, alias corporis ratione perspiciatis
+        voluptates quibusdam dignissimos accusantium consequatur quisquam error laboriosam sed dicta deleniti blanditiis
+        nulla dolorem consequuntur? Esse, deserunt.</p>
+</div>
+
+<div class="hidden w-screen h-screen bg-white fixed inset-0 z-50 p-4 animate__animated animate__fadeInUp animate__faster"
+    id="container-journey">
+    <div class="flex flex-col justify-between h-full pb-4">
+        <div>
+            <div class="flex justify-between items-start">
+                <h2 id="title-journey" class="text-3xl font-bold mt-4">Usando bicicleta</h2>
+                <button id="close-journey" class="font-bold">
+                    <svg class="w-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+            </div>
+            <div class="my-10 text-center flex flex-col">
+                <label for="" class="d-block">TIEMPO</label>
+                <span class="d-block text-5xl font-bold">
+                    <span id="minutes-journey">00</span>:<span id="seconds-journey">00</span>
+                </span>
+            </div>
+        </div>
+        <button id="end-journey" class="mt-5 bg-primary text-white font-bold w-full py-2 px-4 rounded">Terminar
+            trayecto</button>
+    </div>
+</div>
+
+<div id="container-resumen" class="hidden fixed z-40 w-screen bg-primary p-4 text-white" style="bottom: 0; left: 0;">
+    <div class="flex justify-between items center">
+        <span>Tiempo recorrido | <span id="minutes-resumen">00</span>:<span id="seconds-resumen">00</span></span>
+        <button id="btn-resumen">
+            <svg class="w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+            </svg>
+        </button>
+    </div>
+</div>
+
+
+<div class="hidden w-screen h-screen bg-white fixed inset-0 z-50 p-4 animate__animated animate__fadeInUp animate__faster"
+    id="container-stats">
+    <div class="flex flex-col justify-between h-full pb-4">
+        <div>
+            <div class="flex justify-between items-start">
+                <h2 id="title-stats" class="text-3xl font-bold mt-4">Viaje finalizado</h2>
+                <button id="close-stats" class="font-bold">
+                    X
+                </button>
+            </div>
+            <div class="mt-10">
+                <p class="text-normal">Estadisticas</p>
+                <div class="bg-gray-200 p-4">
+                    <% if(user_card) { %>
+                    <div class="flex items-center my-3 py-2">
+                        <div class="">
+                            <% if(user_card.type === 'mastercard') { %>
+                            <img src="https://1000marcas.net/wp-content/uploads/2019/12/MasterCard-Logo.png" alt=""
+                                class="w-16">
+                            <% } if (user_card.type === 'visa') { %>
+                            <img src="https://logodownload.org/wp-content/uploads/2016/10/visa-logo-3.png" alt=""
+                                class="w-16">
+                            <% } %>
+                        </div>
+                        <div class="flex w-full justify-between items-center">
+                            <p class="text-xl ml-2 font-medium"><%= user_card.getNumber %></p>
+                        </div>
+                    </div>
+                    <% } %>
+                    <p class="text-xl">
+                        Tiempo:
+                        <span id="stat-time" class="text-2xl font-semibold text-primary">10:04</span>
+                        <span class="text-xs">(descontado de tu tarjeta)</span>
+                    </p>
+                    <p class="text-xl mt-5">Precio: $ <span id="stat-price"
+                            class="text-2xl font-semibold text-primary"></span></p>
+                </div>
+            </div>
+        </div>
+        <button id="end-stats" class="mt-5 bg-primary text-white font-bold w-full py-2 px-4 rounded">Aceptar</button>
+    </div>
+</div>
+
 
 <iframe frameborder="0" style="margin-top: -150px;"
     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3329.077528750691!2d-70.6598433850494!3d-33.447286604735446!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662c507f91be917%3A0xcfac72a68dd4b986!2sDuoc%20UC%20-%20Sede%20Padre%20Alonso%20de%20Ovalle!5e0!3m2!1ses-419!2scl!4v1605245282821!5m2!1ses-419!2scl"></iframe>

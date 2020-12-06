@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const User = require("../../models/User");
+const Journey = require("../../models/Journey");
 const {
 	isAuthenticated,
 	isNotUser,
@@ -75,20 +76,26 @@ router.post("/admin/users", [isAuthenticated, isAdmin], async (req, res) => {
 
 router.get(
 	"/admin/users/:id",
-	[isAuthenticated, isNotUser],
+	// [isAuthenticated, isNotUser],
 	async (req, res) => {
 		const id = req.params.id;
 
-		User.findById(id, (err, user) => {
+		User.findById(id, async (err, user) => {
 			if (user.role !== "USER_ROLE") {
 				req.flash("error", "El usuario no existe");
 				return res.redirect("/admin/users");
 			}
 
+			const journeys = await Journey.find({ user_id: user._id }).lean({
+				virtuals: true,
+			});
+			console.log(journeys);
+
 			res.render("admin/users/view.html", {
 				title: "Ver usuario",
 				route: "admin.users",
 				user,
+				journeys: journeys.reverse(),
 			});
 		});
 	}

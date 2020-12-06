@@ -59,7 +59,8 @@
                 <div class="user-panel mt-2 pb-2 mb-3 d-flex">
                     <div class="info">
                         <a class="d-block"><%= user.name %></a>
-                        <p class="text-muted text-sm m-0 p-0"><% if (user.role === 'ADMIN_ROLE'){%>Administrador<%}else{%>Moderador<%}%>
+                        <p class="text-muted text-sm m-0 p-0">
+                            <% if (user.role === 'ADMIN_ROLE'){%>Administrador<%}else{%>Moderador<%}%>
                             <span
                                 class="badge badge-success">online</span></p>
                     </div>

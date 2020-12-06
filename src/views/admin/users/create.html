@@ -38,16 +38,16 @@
                         <label for="name">Tipo usuario</label>
                         <div class="d-block">
                             <div class="form-check-inline">
-                                <input class="form-check-input" type="radio" id="type_normal" name="type" value="normal"
-                                    <% if(data.type) { if (data.type == 'normal') { %> checked <%  } } else {%>
-                                    checked<% } %>>
-                                <label class="form-check-label" for="type_normal">Normal</label>
+                                <input class="form-check-input" type="radio" id="type_callcenter" name="type"
+                                    value="callcenter" <% if(data.type) { if (data.type == 'callcenter') { %> checked
+                                    <%  } } else {%> checked<% } %>>
+                                <label class="form-check-label" for="type_callcenter">CallCenter</label>
                             </div>
                             <div class="form-check-inline">
-                                <input class="form-check-input" type="radio" id="type_moderator" name="type"
-                                    value="moderator" <% if(data.type) { if (data.type == 'moderator') { %> checked
+                                <input class="form-check-input" type="radio" id="type_mechanic" name="type"
+                                    value="mechanic" <% if(data.type) { if (data.type == 'mechanic') { %> checked
                                     <%  } }%>>
-                                <label class="form-check-label" for="type_moderator">Moderador</label>
+                                <label class="form-check-label" for="type_mechanic">Mecanico</label>
                             </div>
                         </div>
                     </div>

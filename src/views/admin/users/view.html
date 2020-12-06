@@ -37,56 +37,45 @@
                     <thead>
                         <tr>
                             <th>Fecha</th>
-                            <th class="d-none"></th>
-                            <th></th>
+                            <th>Estado</th>
+                            <th>Valor</th>
                             <th>Tiempo</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <% journeys.forEach((journey) => { %>
                         <tr>
-                            <td>12/02/20 13:45</td>
-                            <td class="d-none">1</td>
+                            <td><%= journey.getDate %></td>
                             <td>
-                                <div class="rounded p-1 text-center bg-success">W</div>
+                                <% if(journey.state === 0) { %>
+                                <div class="badge badge-secondary">
+                                    En proceso
+                                </div>
+                                <% } %>
+                                <% if(journey.state === 1) { %>
+                                <div class="badge badge-success">
+                                    Pagado
+                                </div>
+                                <% } %>
+                                <% if(journey.state === 2) { %>
+                                <div class="badge badge-success">
+                                    Con problemas
+                                </div>
+                                <% } %>
                             </td>
-                            <td>83 min.</td>
+                            <% if(journey.state !== 0) { %>
+                            <td>$ <%= journey.price %></td>
+                            <% } %>
+                            <% if(journey.state !== 0) { %>
+                            <td><%= Math.trunc((journey.end - journey.start) / 1000 / 60) %> min.</td>
+                            <% } %>
                         </tr>
-                        <tr>
-                            <td>12/02/20 13:45</td>
-                            <td class="d-none">1</td>
-                            <td>
-                                <div class="rounded p-1 text-center bg-warning">W</div>
-                            </td>
-                            <td>83 min.</td>
-                        </tr>
-                        <tr>
-                            <td>12/02/20 13:45</td>
-                            <td class="d-none">1</td>
-                            <td>
-                                <div class="rounded p-1 text-center bg-success">W</div>
-                            </td>
-                            <td>83 min.</td>
-                        </tr>
-                        <tr>
-                            <td>12/02/20 13:45</td>
-                            <td class="d-none">1</td>
-                            <td>
-                                <div class="rounded p-1 text-center bg-warning">W</div>
-                            </td>
-                            <td>83 min.</td>
-                        </tr>
-                        <tr>
-                            <td>12/02/20 13:45</td>
-                            <td class="d-none">1</td>
-                            <td>
-                                <div class="rounded p-1 text-center bg-warning">W</div>
-                            </td>
-                            <td>83 min.</td>
-                        </tr>
+                        <% })%>
                     </tbody>
                 </table>
             </div>
         </div>
+    </div>
 </section>
 
 <script src="/js/admin/jquery.dataTables.min.js"></script>
@@ -107,7 +96,7 @@
             "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
         },
         "order": [
-            [1, "desc"]
+            [0, "asc"],
         ]
     });
 </script>

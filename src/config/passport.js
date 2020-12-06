@@ -30,7 +30,6 @@ passport.use(
 				req.flash("data", { email, password });
 				return done(null, false, {});
 			}
-
 			return done(null, user);
 		}
 	)

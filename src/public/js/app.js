@@ -88,7 +88,7 @@ if (currentPage === "home") {
 
 	const timeJourney = (minutes, seconds) => {
 		intervalJourney = setInterval(() => {
-			if (seconds > 60) {
+			if (seconds >= 60) {
 				minutes = (seconds % 60) + minutes;
 				seconds = 0;
 			}
